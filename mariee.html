@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>La mariée · Mariage</title>
+  <meta name="description" content="Découvrez la mariée : son histoire, ses passions et ses mots.">
+  <meta name="theme-color" content="#fbf7f1">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.page-veil{display:none}.reveal{opacity:1;transform:none}</style></noscript>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="bride">
+  <div class="page-veil" aria-hidden="true"><span class="page-veil__mark">♥</span></div>
+
+  <main>
+    <header class="page-head">
+      <div class="container">
+        <span class="eyebrow reveal">La future épouse</span>
+        <h1 class="title-duo reveal" style="--d:.1s"><span class="script">La</span><span class="caps">Mariée</span></h1>
+      </div>
+    </header>
+
+    <section class="container">
+      <div class="profile profile--reverse">
+        <div class="profile__media reveal reveal--right">
+          <div class="photo-frame">
+            <img id="profile-photo" alt="" loading="eager">
+          </div>
+          <span class="profile__badge glass"><span data-icon="pin"></span><span id="profile-city"></span></span>
+        </div>
+
+        <div class="profile__body">
+          <span class="eyebrow reveal">Faites sa connaissance</span>
+          <h2 class="profile__name reveal" style="--d:.1s" id="profile-name"></h2>
+          <p class="profile__script reveal" style="--d:.15s">future épouse de <span data-bind="groomFirst"></span></p>
+          <p class="profile__bio reveal" style="--d:.2s" id="profile-bio"></p>
+
+          <p class="profile__label reveal" style="--d:.25s">Ses passions</p>
+          <ul class="chips reveal" style="--d:.3s" id="profile-passions"></ul>
+
+          <blockquote class="quote glass reveal" style="--d:.35s">
+            <p id="profile-quote" style="margin:0"></p>
+            <footer id="profile-sign"></footer>
+          </blockquote>
+
+          <div class="profile-switch reveal" style="--d:.4s">
+            <a class="btn" href="programme.html">Voir le programme <span data-icon="arrow"></span></a>
+            <a class="btn btn--ghost" href="marie.html">Le marié</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

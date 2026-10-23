@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>RSVP · Mariage</title>
+  <meta name="description" content="Confirmez votre présence à notre mariage.">
+  <meta name="theme-color" content="#fbf7f1">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.page-veil{display:none}.reveal{opacity:1;transform:none}</style></noscript>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="rsvp">
+  <div class="page-veil" aria-hidden="true"><span class="page-veil__mark">♥</span></div>
+
+  <main>
+    <header class="page-head">
+      <div class="container">
+        <div class="heart-sep reveal"><span data-icon="heart"></span></div>
+        <h1 class="rsvp-mark reveal" style="--d:.1s" aria-label="RSVP"><span>RS</span><span>VP</span></h1>
+        <p class="rsvp-by reveal" style="--d:.2s">Avant le <span data-bind="deadline"></span></p>
+        <div class="rsvp-contact reveal" style="--d:.25s" id="rsvp-contact"></div>
+      </div>
+    </header>
+
+    <section class="container">
+      <div class="rsvp-wrap">
+        <!-- Formulaire -->
+        <div class="rsvp-card glass reveal reveal--zoom" id="rsvp-card">
+          <p class="rsvp-greeting" id="rsvp-greeting"></p>
+          <p class="rsvp-intro">Nous serions honorés de vous compter parmi nous. Merci de nous indiquer votre réponse.</p>
+
+          <form id="rsvp-form" novalidate>
+            <div class="field" id="field-name">
+              <label for="guest-name">Nom et prénom</label>
+              <input class="input" id="guest-name" name="name" type="text" autocomplete="name" placeholder="Votre nom complet" maxlength="80" required>
+              <p class="field__error">Merci d'indiquer votre nom.</p>
+            </div>
+
+            <fieldset class="field" id="field-attending" style="border:0; padding:0; margin-inline:0">
+              <legend class="field__label" style="padding:0">Serez-vous présent(e) ?</legend>
+              <div class="choice-group">
+                <div class="choice">
+                  <input type="radio" id="att-yes" name="attending" value="oui">
+                  <label for="att-yes"><strong>Oui</strong><small>avec joie</small></label>
+                </div>
+                <div class="choice">
+                  <input type="radio" id="att-no" name="attending" value="non">
+                  <label for="att-no"><strong>Non</strong><small>à regret</small></label>
+                </div>
+              </div>
+              <p class="field__error">Merci de choisir une réponse.</p>
+            </fieldset>
+
+            <div class="field field--guests">
+              <span class="field__label" id="guests-label">Nombre de personnes</span>
+              <div class="stepper" role="group" aria-labelledby="guests-label">
+                <button type="button" id="guests-minus" aria-label="Retirer une personne">−</button>
+                <output id="guests-output" aria-live="polite">1</output>
+                <button type="button" id="guests-plus" aria-label="Ajouter une personne">+</button>
+              </div>
+              <input type="hidden" id="guests" name="guests" value="1">
+            </div>
+
+            <div class="field">
+              <label for="guest-message">Un mot pour les mariés <span class="optional">(facultatif)</span></label>
+              <textarea class="input" id="guest-message" name="message" maxlength="1000" placeholder="Vos vœux, une anecdote, une allergie alimentaire…"></textarea>
+            </div>
+
+            <button class="btn btn--gold rsvp-submit" type="submit">Envoyer ma réponse</button>
+            <p class="rsvp-foot">Une seule réponse possible par invité.</p>
+          </form>
+        </div>
+
+        <!-- Confirmation -->
+        <div class="confirmation glass" id="confirmation" hidden aria-live="polite">
+          <div class="confirmation__icon" id="confirm-icon"></div>
+          <h2 id="confirm-title"></h2>
+          <p id="confirm-text"></p>
+          <dl class="confirmation__recap" id="confirm-recap"></dl>
+          <a class="btn btn--ghost" href="programme.html">Voir le programme <span data-icon="arrow"></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Invitation · Mariage</title>
+  <meta name="description" content="Vous êtes invités à notre mariage. Découvrez le programme, le lieu et confirmez votre présence.">
+  <meta name="theme-color" content="#fbf7f1">
+  <meta property="og:title" content="Invitation à notre mariage">
+  <meta property="og:image" content="assets/couple.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.page-veil{display:none}.reveal{opacity:1;transform:none}</style></noscript>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="home">
+  <div class="page-veil" aria-hidden="true"><span class="page-veil__mark">♥</span></div>
+
+  <!-- Enveloppe d'ouverture avec sceau de cire -->
+  <div class="envelope-screen" id="envelope-screen" hidden>
+    <p class="envelope-for" id="envelope-for">Vous avez reçu une invitation</p>
+    <button class="envelope" type="button" aria-label="Ouvrir l'invitation">
+      <span class="envelope__body"></span>
+      <span class="envelope__letter"><span data-bind="couple"></span></span>
+      <span class="envelope__pocket"></span>
+      <span class="envelope__flap"></span>
+      <span class="envelope__seal" data-bind="monogram"></span>
+    </button>
+    <p class="envelope-hint">Touchez le sceau pour ouvrir</p>
+  </div>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-label="Invitation">
+      <div class="hero__card" id="hero-card">
+        <div class="hero__bg-zoom" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="hero__kicker">Nous nous marions</p>
+          <h1 class="hero__names">
+            <span class="name" data-bind="groomFirst"></span>
+            <span class="name"><span class="amp">&amp;</span><span data-bind="brideFirst"></span></span>
+          </h1>
+          <p class="hero__city" data-bind="city"></p>
+          <div class="ornament" aria-hidden="true"><span data-icon="heart"></span></div>
+          <p class="hero__date" data-bind="dateLong"></p>
+          <p class="hero__meta">
+            <span><span data-icon="clock"></span><span data-bind="timeLabel"></span></span>
+            <span><span data-icon="pin"></span><span data-bind="venueName"></span></span>
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--gold" href="rsvp.html">Confirmer ma présence <span data-icon="arrow"></span></a>
+            <a class="btn btn--ghost" href="localisation.html">Voir le lieu <span data-icon="pin"></span></a>
+          </div>
+          <p class="hero__tagline" data-bind="tagline"></p>
+        </div>
+      </div>
+      <span class="scroll-hint" aria-hidden="true"></span>
+    </section>
+
+    <!-- Introduction -->
+    <section class="section intro">
+      <div class="container">
+        <span class="eyebrow reveal">Avec toute notre joie</span>
+        <h2 class="title-duo reveal" style="--d:.1s"><span class="script">Chers</span><span class="caps">proches</span></h2>
+        <div class="heart-sep reveal" style="--d:.2s"><span data-icon="heart"></span></div>
+        <p class="intro__text reveal" style="--d:.25s">
+          Après de belles années à écrire notre histoire, nous avons décidé d'unir nos vies.
+          Ce jour n'aurait pas la même saveur sans vous : nous serions profondément heureux
+          de vous avoir à nos côtés pour célébrer notre amour, rire, danser et créer ensemble
+          des souvenirs inoubliables.
+        </p>
+        <p class="intro__sign reveal" style="--d:.35s" data-bind="couple"></p>
+
+        <div class="countdown glass reveal reveal--zoom" id="countdown" style="--d:.4s" aria-label="Compte à rebours"></div>
+
+        <p class="deadline-note reveal" style="--d:.5s">
+          <span data-icon="calendar"></span>
+          <span>Merci de répondre avant le <strong data-bind="deadline"></strong></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Les détails -->
+    <section class="section" style="padding-top: 0">
+      <div class="container">
+        <div class="details-card glass reveal">
+          <h2 class="title-duo"><span class="script">Les</span><span class="caps">Détails</span></h2>
+          <div class="calendar" id="calendar"></div>
+          <p class="calendar__time">à <span data-bind="timeLabel"></span></p>
+
+          <div class="details-block">
+            <h3>Le lieu</h3>
+            <p><strong data-bind="venueName"></strong><br><span data-bind="fullAddress"></span></p>
+          </div>
+
+          <div class="details-block">
+            <h3>Dress code</h3>
+            <p data-bind="dressCode"></p>
+            <ul class="swatches" id="swatches" aria-label="Couleurs suggérées"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cartes de navigation -->
+    <section class="section" style="padding-top: 0">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow reveal">Découvrir</span>
+          <h2 class="section-title" data-split>Tout sur notre <em>grand jour</em></h2>
+        </div>
+        <div class="cards">
+          <a class="nav-card glass reveal" href="marie.html" style="--d:0s">
+            <span class="nav-card__icon"><span data-icon="groom"></span></span>
+            <h3>Le marié</h3>
+            <p>Faites connaissance avec <span data-bind="groomFirst"></span>, son histoire et ses passions.</p>
+            <span class="nav-card__arrow">Découvrir <span data-icon="arrow"></span></span>
+          </a>
+          <a class="nav-card glass reveal" href="mariee.html" style="--d:.08s">
+            <span class="nav-card__icon"><span data-icon="bride"></span></span>
+            <h3>La mariée</h3>
+            <p>Découvrez <span data-bind="brideFirst"></span>, son univers et ses mots doux.</p>
+            <span class="nav-card__arrow">Découvrir <span data-icon="arrow"></span></span>
+          </a>
+          <a class="nav-card glass reveal" href="programme.html" style="--d:.16s">
+            <span class="nav-card__icon"><span data-icon="clock"></span></span>
+            <h3>Programme</h3>
+            <p>De la cérémonie à la première danse, toutes les étapes de la journée.</p>
+            <span class="nav-card__arrow">Voir le programme <span data-icon="arrow"></span></span>
+          </a>
+          <a class="nav-card glass reveal" href="rsvp.html" style="--d:.08s">
+            <span class="nav-card__icon"><span data-icon="envelope"></span></span>
+            <h3>RSVP</h3>
+            <p>Confirmez votre présence avant le <span data-bind="deadline"></span>.</p>
+            <span class="nav-card__arrow">Répondre <span data-icon="arrow"></span></span>
+          </a>
+          <a class="nav-card glass reveal" href="localisation.html" style="--d:.16s">
+            <span class="nav-card__icon"><span data-icon="pin"></span></span>
+            <h3>Localisation</h3>
+            <p>Plan, itinéraire, hébergements et informations pratiques.</p>
+            <span class="nav-card__arrow">Voir le lieu <span data-icon="arrow"></span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

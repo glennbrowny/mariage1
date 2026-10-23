@@ -1,0 +1,110 @@
+{
+  "couple": {
+    "groom": {
+      "firstName": "Alexandre",
+      "fullName": "Alexandre Martin",
+      "photo": "assets/marie.jpg",
+      "city": "Libreville, Gabon",
+      "bio": "Ingénieur passionné et éternel optimiste, Alexandre aime les longues discussions au coucher du soleil, les voyages improvisés et les repas partagés en famille. Il a trouvé en Camille sa plus belle aventure.",
+      "passions": ["Voyages", "Football", "Cuisine", "Musique"],
+      "quote": "Je t'ai cherchée sans le savoir, et je t'ai reconnue au premier regard."
+    },
+    "bride": {
+      "firstName": "Camille",
+      "fullName": "Camille Dubois",
+      "photo": "assets/mariee.jpg",
+      "city": "Libreville, Gabon",
+      "bio": "Créative, douce et pleine d'énergie, Camille illumine chaque pièce où elle entre. Amoureuse des fleurs, de la lecture et des grands éclats de rire, elle s'apprête à écrire le plus beau chapitre de sa vie.",
+      "passions": ["Fleurs", "Lecture", "Danse", "Photographie"],
+      "quote": "Avec toi, chaque jour ressemble à une promesse tenue."
+    }
+  },
+  "wedding": {
+    "date": "2027-06-12",
+    "time": "15:00",
+    "venueName": "Église Saint-Michel",
+    "address": "Boulevard Triomphal Omar Bongo",
+    "city": "Libreville, Gabon",
+    "mapsQuery": "Église Saint-Michel, Libreville, Gabon",
+    "tagline": "Nous étions une promesse, et Dieu l'a accomplie.",
+    "heroImage": "assets/hero.jpg",
+    "couplePhoto": "assets/couple.jpg",
+    "music": "",
+    "dressCode": {
+      "text": "Tenue de soirée élégante. Nous vous invitons à porter des tons doux : ivoire, blush, champagne ou or.",
+      "colors": ["#f3ece2", "#e8bfc0", "#d9b98a", "#c6a15b", "#6e5260"]
+    },
+    "practicalInfo": [
+      "Merci d'arriver 30 minutes avant le début de la cérémonie.",
+      "Un parking gratuit est disponible à proximité du lieu.",
+      "Tenue de soirée souhaitée — touches de blush et d'or bienvenues.",
+      "Pour toute question, contactez-nous par téléphone ou par e-mail."
+    ]
+  },
+  "contact": {
+    "phone": "+241 00 00 00 00",
+    "email": "mariage@exemple.com"
+  },
+  "rsvp": {
+    "deadline": "2027-05-01",
+    "maxGuests": 6,
+    "endpoint": ""
+  },
+  "programme": [
+    {
+      "time": "15:00",
+      "title": "Cérémonie",
+      "description": "Échange des vœux et des alliances, entourés de ceux que nous aimons.",
+      "place": "Église Saint-Michel",
+      "icon": "rings"
+    },
+    {
+      "time": "16:30",
+      "title": "Séance photos",
+      "description": "Immortalisons ensemble ce moment : photos de groupe avec familles et amis.",
+      "place": "Jardins de l'église",
+      "icon": "camera"
+    },
+    {
+      "time": "18:00",
+      "title": "Réception",
+      "description": "Cocktail de bienvenue, rafraîchissements et douceurs pour célébrer les jeunes mariés.",
+      "place": "Salle des Fêtes Le Jardin",
+      "icon": "glass"
+    },
+    {
+      "time": "20:00",
+      "title": "Dîner",
+      "description": "Un dîner raffiné, des discours émouvants et beaucoup de rires.",
+      "place": "Salle des Fêtes Le Jardin",
+      "icon": "dinner"
+    },
+    {
+      "time": "22:30",
+      "title": "Première danse & soirée",
+      "description": "Ouverture du bal par les mariés, puis place à la fête jusqu'au bout de la nuit !",
+      "place": "Salle des Fêtes Le Jardin",
+      "icon": "music"
+    }
+  ],
+  "accommodations": [
+    {
+      "name": "Hôtel Le Cristal",
+      "address": "Bord de mer, Libreville",
+      "phone": "+241 00 00 00 01",
+      "note": "À 10 minutes du lieu"
+    },
+    {
+      "name": "Résidence Les Palmiers",
+      "address": "Quartier Louis, Libreville",
+      "phone": "+241 00 00 00 02",
+      "note": "Tarif préférentiel en mentionnant le mariage"
+    },
+    {
+      "name": "Hôtel du Jardin",
+      "address": "Centre-ville, Libreville",
+      "phone": "+241 00 00 00 03",
+      "note": "Navette prévue après la soirée"
+    }
+  ]
+}

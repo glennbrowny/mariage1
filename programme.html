@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Programme · Mariage</title>
+  <meta name="description" content="Le programme de la journée : cérémonie, photos, réception, dîner et soirée.">
+  <meta name="theme-color" content="#fbf7f1">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.page-veil{display:none}.reveal{opacity:1;transform:none}</style></noscript>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="programme">
+  <div class="page-veil" aria-hidden="true"><span class="page-veil__mark">♥</span></div>
+
+  <main>
+    <header class="page-head">
+      <div class="container">
+        <span class="eyebrow reveal">Le déroulé de la journée</span>
+        <h1 class="title-duo reveal" style="--d:.1s"><span class="script">Le</span><span class="caps">Programme</span></h1>
+        <div class="heart-sep reveal" style="--d:.2s"><span data-icon="heart"></span></div>
+        <p class="reveal" style="--d:.25s"><span data-bind="dateLong"></span> · <span data-bind="city"></span></p>
+      </div>
+    </header>
+
+    <section class="container">
+      <div class="timeline">
+        <span class="timeline__line" aria-hidden="true"></span>
+        <span class="timeline__progress" aria-hidden="true"></span>
+        <div id="timeline-items"></div>
+      </div>
+    </section>
+
+    <section class="container" style="text-align:center; padding-bottom: 90px">
+      <p class="intro__text reveal">Nous avons hâte de vivre chacun de ces moments avec vous.</p>
+      <div class="hero__actions reveal" style="--d:.1s; animation:none">
+        <a class="btn btn--gold" href="rsvp.html">Confirmer ma présence <span data-icon="arrow"></span></a>
+        <a class="btn btn--ghost" href="localisation.html">Voir le lieu <span data-icon="pin"></span></a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

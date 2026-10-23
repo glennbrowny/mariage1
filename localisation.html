@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Localisation · Mariage</title>
+  <meta name="description" content="Le lieu du mariage, l'itinéraire, les hébergements et les informations pratiques.">
+  <meta name="theme-color" content="#fbf7f1">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.page-veil{display:none}.reveal{opacity:1;transform:none}</style></noscript>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="location">
+  <div class="page-veil" aria-hidden="true"><span class="page-veil__mark">♥</span></div>
+
+  <main>
+    <header class="page-head">
+      <div class="container">
+        <span class="eyebrow reveal">Comment venir</span>
+        <h1 class="title-duo reveal" style="--d:.1s"><span class="script">Le</span><span class="caps">Lieu</span></h1>
+        <div class="heart-sep reveal" style="--d:.2s"><span data-icon="heart"></span></div>
+      </div>
+    </header>
+
+    <section class="container">
+      <div class="location">
+        <div class="venue-card glass reveal reveal--left">
+          <span class="eyebrow">Cérémonie</span>
+          <h2 data-bind="venueName"></h2>
+          <p class="venue-line"><span data-icon="pin"></span><span data-bind="fullAddress"></span></p>
+          <p class="venue-line"><span data-icon="calendar"></span><span data-bind="dateLong"></span></p>
+          <p class="venue-line"><span data-icon="clock"></span><span>à <span data-bind="timeLabel"></span></span></p>
+          <div class="venue-actions">
+            <a class="btn btn--gold" id="directions" href="#" target="_blank" rel="noopener">Ouvrir l'itinéraire <span data-icon="route"></span></a>
+            <button class="btn btn--ghost" id="copy-address" type="button">Copier l'adresse <span data-icon="copy"></span></button>
+          </div>
+        </div>
+
+        <div class="map-frame reveal reveal--right">
+          <iframe id="map" title="Carte du lieu de la cérémonie" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom: 70px">
+      <div class="section-head">
+        <span class="eyebrow reveal">Bon à savoir</span>
+        <h2 class="section-title" data-split>Informations <em>pratiques</em></h2>
+      </div>
+      <ul class="info-list" id="practical-info"></ul>
+    </section>
+
+    <section class="container" id="stays-section">
+      <div class="section-head">
+        <h2 class="title-duo reveal"><span class="script">Nos recommandations</span><span class="caps">Hébergements</span></h2>
+      </div>
+      <div class="stays" id="stays"></div>
+    </section>
+  </main>
+</body>
+</html>
