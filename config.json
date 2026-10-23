@@ -29,7 +29,7 @@
     "tagline": "Nous étions une promesse, et Dieu l'a accomplie.",
     "heroImage": "assets/hero.jpg",
     "couplePhoto": "assets/couple.jpg",
-    "music": "",
+    "music": "assets/son.mp3",
     "dressCode": {
       "text": "Tenue de soirée élégante. Nous vous invitons à porter des tons doux : ivoire, blush, champagne ou or.",
       "colors": ["#f3ece2", "#e8bfc0", "#d9b98a", "#c6a15b", "#6e5260"]

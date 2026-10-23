@@ -38,7 +38,7 @@ const DEFAULT_CONFIG = {
     tagline: "Nous étions une promesse, et Dieu l'a accomplie.",
     heroImage: "assets/hero.jpg",
     couplePhoto: "assets/couple.jpg",
-    music: "",
+    music: "assets/son.mp3",
     dressCode: {
       text: "Tenue de soirée élégante. Nous vous invitons à porter des tons doux : ivoire, blush, champagne ou or.",
       colors: ["#f3ece2", "#e8bfc0", "#d9b98a", "#c6a15b", "#6e5260"]
@@ -393,48 +393,110 @@ function setupPageTransitions() {
   });
 }
 
-/* Musique de fond (facultative) */
+/* =========================================================
+   Musique de fond
+   - Démarre automatiquement dès que le navigateur l'autorise.
+   - Les navigateurs bloquent le son tant que le visiteur n'a pas
+     touché la page : dans ce cas elle démarre au premier toucher
+     (ex. ouverture de l'enveloppe).
+   - Elle reprend au même endroit d'une page à l'autre.
+   ========================================================= */
 let audio;
-function setupMusic(cfg) {
+let musicPlay = () => {};
+const MUSIC_VOLUME = 0.6;
+
+function setupMusic(cfg, vars) {
   const src = cfg.wedding.music;
   if (!src) return;
   audio = new Audio(src);
   audio.loop = true;
-  audio.volume = 0.55;
-  const t = parseFloat(store.get("sessionStorage", "music-time"));
-  if (t) audio.currentTime = t;
+  audio.preload = "auto";
+  audio.volume = 0;
 
-  const btn = document.createElement("button");
-  btn.className = "music-toggle";
-  btn.type = "button";
-  document.body.append(btn);
+  const saved = parseFloat(store.get("sessionStorage", "music-time"));
+  if (saved) audio.addEventListener("loadedmetadata", () => {
+    if (saved < audio.duration) audio.currentTime = saved;
+  }, { once: true });
+
+  // Lecteur animé : disque vinyle + égaliseur
+  const player = document.createElement("div");
+  player.className = "music-player";
+  player.innerHTML = `
+    <span class="music-player__hint" aria-hidden="true">Touchez pour la musique ♪</span>
+    <button class="music-player__btn" type="button" aria-label="Lancer la musique">
+      <span class="music-player__disc" aria-hidden="true"><span>${esc(vars.groomInitial)}&amp;${esc(vars.brideInitial)}</span></span>
+      <span class="music-player__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="music-player__label">Musique</span>
+    </button>`;
+  document.body.append(player);
+  const btn = $(".music-player__btn", player);
+  const label = $(".music-player__label", player);
+
+  // Fondu du volume
+  let fadeId;
+  const fadeTo = (target, ms, done) => {
+    cancelAnimationFrame(fadeId);
+    const from = audio.volume, start = performance.now();
+    const step = (now) => {
+      const k = Math.min(1, (now - start) / ms);
+      audio.volume = from + (target - from) * k;
+      if (k < 1) fadeId = requestAnimationFrame(step); else if (done) done();
+    };
+    fadeId = requestAnimationFrame(step);
+  };
 
   const render = () => {
     const playing = !audio.paused;
-    btn.classList.toggle("is-playing", playing);
-    btn.innerHTML = icon(playing ? "music" : "mute");
+    player.classList.toggle("is-playing", playing);
     btn.setAttribute("aria-label", playing ? "Couper la musique" : "Lancer la musique");
+    label.textContent = playing ? "En lecture" : "Musique";
   };
+
+  const play = () => {
+    const p = audio.play();
+    if (!p) return;
+    p.then(() => {
+      player.classList.remove("is-blocked");
+      fadeTo(MUSIC_VOLUME, 1800);
+      removeUnlock();
+    }).catch(() => {
+      // Lecture bloquée : on attend le premier geste du visiteur
+      player.classList.add("is-blocked");
+      addUnlock();
+    });
+  };
+  const pause = () => fadeTo(0, 500, () => audio.pause());
+  musicPlay = () => { store.set("sessionStorage", "music-off", "0"); play(); };
+
+  // Premier toucher n'importe où sur la page = lancement de la musique
+  const unlock = (e) => {
+    if (e.target.closest && e.target.closest(".music-player")) return;
+    if (store.get("sessionStorage", "music-off") === "1") return;
+    play();
+  };
+  const events = ["pointerdown", "touchend", "keydown"];
+  const addUnlock = () => events.forEach((ev) => document.addEventListener(ev, unlock, { capture: true }));
+  const removeUnlock = () => events.forEach((ev) => document.removeEventListener(ev, unlock, { capture: true }));
+
   btn.addEventListener("click", () => {
     if (audio.paused) {
-      audio.play().catch(() => {});
-      store.set("sessionStorage", "music-on", "1");
+      store.set("sessionStorage", "music-off", "0");
+      play();
     } else {
-      audio.pause();
-      store.set("sessionStorage", "music-on", "0");
+      store.set("sessionStorage", "music-off", "1");
+      pause();
     }
   });
   audio.addEventListener("play", render);
   audio.addEventListener("pause", render);
   window.addEventListener("pagehide", () => store.set("sessionStorage", "music-time", String(audio.currentTime)));
   render();
-  if (store.get("sessionStorage", "music-on") === "1") audio.play().catch(render);
+
+  // Lancement automatique (sauf si le visiteur a coupé le son)
+  if (store.get("sessionStorage", "music-off") !== "1") play();
 }
 function playMusic() {
-  if (audio && audio.paused) {
-    audio.play().catch(() => {});
-    store.set("sessionStorage", "music-on", "1");
-  }
+  if (audio && audio.paused) musicPlay();
 }
 
 /* =========================================================
@@ -444,15 +506,32 @@ function initHome(cfg, vars, invite) {
   // Image de fond / photo du couple
   const card = $("#hero-card");
   if (card) {
+    // Fond floral : essaie l'image configurée, puis arriere.jpg à la racine
+    const useBackground = (sources) => {
+      const src = sources.shift();
+      if (!src) return;
+      const test = new Image();
+      test.onload = () => card.style.setProperty("--hero-img", `url("${src}")`);
+      test.onerror = () => useBackground(sources);
+      test.src = src;
+    };
+    const backgrounds = [cfg.wedding.heroImage, "arriere.jpg"].filter(Boolean);
+
     if (cfg.wedding.couplePhoto) {
       card.classList.add("has-photo");
       const img = document.createElement("img");
       img.className = "hero__photo";
       img.alt = `${vars.groomFirst} et ${vars.brideFirst}`;
+      // Photo introuvable : on revient au fond floral au lieu d'une image cassée
+      img.onerror = () => {
+        img.remove();
+        card.classList.remove("has-photo");
+        useBackground(backgrounds);
+      };
       img.src = cfg.wedding.couplePhoto;
       card.prepend(img);
-    } else if (cfg.wedding.heroImage) {
-      card.style.setProperty("--hero-img", `url("${cfg.wedding.heroImage}")`);
+    } else {
+      useBackground(backgrounds);
     }
   }
 
@@ -796,5 +875,5 @@ async function start() {
   splitWords();
   startPetals();
   setupPageTransitions();
-  setupMusic(cfg);
+  setupMusic(cfg, vars);
 }
